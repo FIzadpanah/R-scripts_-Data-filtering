@@ -29,7 +29,7 @@ library(dplyr)
 suppressWarnings(suppressMessages(library(tidyverse)))
 library(tidyverse)
 ##Read the file:
-input <- read.delim("~/AnalysisData_2019-2022/Data/Repys_ByTrial_19-22.txt")
+input <- read.delim(".txt")
 
 levels(input$Loc) 
 #----------------------------------------------------------------------------------------------------
@@ -78,6 +78,6 @@ write.table(df4,
             quote=FALSE,
             row.names=FALSE)
 input2 <- read.delim(".txt")
-levels(input2$Loc) ###  20 Locations
+levels(input2$Loc) ###  .. Locations
 
 
