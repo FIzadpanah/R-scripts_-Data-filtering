@@ -1,17 +1,13 @@
 #########################################################################
 ###' Analysis to filter by trial value less than 0.30
-###' PP/SP
-###' 
-### 17-Mar-2023
-###' v2: 
-###' Fatemeh
+### Mar-2023
 #########################################################################
 
 rm(list=ls())
 options(scipen = 999, warn = -1)
 
 ##' Set working directory
-setwd("/home/yazdanpa/AnalysisData_2019-2022") ### OJO: Change Working dir
+setwd("") ### OJO: Change Working dir
 getwd()
 
 ##' load libraries
@@ -37,51 +33,51 @@ input <- read.delim("~/AnalysisData_2019-2022/Data/Repys_ByTrial_19-22.txt")
 
 levels(input$Loc) 
 #----------------------------------------------------------------------------------------------------
-# Filtering based on REPY threshhold:
+# Filtering based on values name (X) threshhold:
 
-input %>% filter(Plot == "REPY" & value <= 0.30)
+input %>% filter(Plot == "X" & value <= 0.30)
 
-df1 <-  subset(input,input$Plot == "REPY" & !(input$value <= 0.30)) # filter all values below 0.3
+df1 <-  subset(input,input$Plot == "X" & !(input$value <= 0.30)) # filter all values below 0.3
 levels(df1$Plot)
-df2 <-  subset(input,!(input$Plot == "REPY")) # Filter just the REPY and have all other values.....
+df2 <-  subset(input,!(input$Plot == "X")) # Filter just the X and have all other values.....
 
 drop.trialValues <-rbind.fill(df1,df2)
 
-levels(drop.trialValues $Loc) ###  21 Locations
+levels(drop.trialValues $Loc) ###  .. Locations
 
 #### Save the output:
 
 write.table(drop.trialValues,
-            "~/AnalysisData_2019-2022/Data/Filterd_Repys_ByTrial_19-22.txt",
+            ".txt",
             sep="\t", dec=".",
             quote=FALSE,
             row.names=FALSE)
 #----------------------------------------------------------------------------------------------------
-df3 <-subset(drop.trialValues, Trait == "BR_1")
-#df3 <-  subset(drop.trialValues,!(drop.trialValues$Trait == "LOh_1"))
+df3 <-subset(drop.trialValues, Trait == "A")
+#df3 <-  subset(drop.trialValues,!(drop.trialValues$Trait == "B"))
 
-#### Save the output of BR_1:
+#### Save the output of A:
 
 write.table(df3,
-            "~/AnalysisData_2019-2022/Data/Filterd_Repys_ByTrial_19-22_ByTraitBR.txt",
+            ".txt",
             sep="\t", dec=".",
             quote=FALSE,
             row.names=FALSE)
 
-input1 <- read.delim("~/AnalysisData_2019-2022/Data/Filterd_Repys_ByTrial_19-22_ByTraitBR.txt")
-levels(input1$Loc) ### 13 Locations
+input1 <- read.delim(".txt")
+levels(input1$Loc) ### .. Locations
 #----------------------------------------------------------------------------------------------------
-df4 <-subset(drop.trialValues, Trait == "LOh_1")
-# Or: df4 <-  subset(drop.trialValues,!(drop.trialValues$Trait == "BR_1"))
+df4 <-subset(drop.trialValues, Trait == "B")
+# Or: df4 <-  subset(drop.trialValues,!(drop.trialValues$Trait == "A"))
 
-#### Save the output of LOh_1:
+#### Save the output of B:
 
 write.table(df4,
-            "~/AnalysisData_2019-2022/Data/Filterd_Repys_ByTrial_19-22_ByTraitLohLOh.txt",
+            ".txt",
             sep="\t", dec=".",
             quote=FALSE,
             row.names=FALSE)
-input2 <- read.delim("~/AnalysisData_2019-2022/Data/Filterd_Repys_ByTrial_19-22_ByTraitLohLOh.txt")
+input2 <- read.delim(".txt")
 levels(input2$Loc) ###  20 Locations
 
 
